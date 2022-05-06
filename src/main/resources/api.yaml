@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: ArtQuiz Backend definition
+  version: v1
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /api/player/quiz/gamestate:
+    get:
+      tags:
+        - quiz
+      operationId: getInitialGameState
+      description: Get initial game state
+      responses:
+        '200':
+          description: OK - Cookie / Header contains game state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameState'
+  /api/player/quiz/answer:
+    post:
+      tags:
+        - quiz
+      operationId: handlePlayerChoice
+      description: Send the curent player choice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerAnswer'
+      responses:
+        '200':
+          description: OK - Cookie / Header contains game state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameState'
+        '400':
+          description: Missing JWT state or wrong schem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+components: {
+  schemas: {
+    GameState: {
+      type: object,
+      properties: {
+        nextQuestion: {
+          $ref: '#/components/schemas/Question'
+        },
+        currentPoints: {
+          type: number
+        },
+        endState: {
+          type: number
+        }
+      }
+    },
+    Question: {
+      type: object,
+      properties: {
+        id: {
+          type: number
+        },
+        description: {
+          type: string
+        },
+        options: {
+          type: array,
+          items: {
+            $ref: '#/components/schemas/AnswerOption'
+          }
+        }
+      }
+    },
+    PlayerAnswer: {
+      type: object,
+      properties: {
+        chosenOption: {
+          $ref: '#/components/schemas/AnswerOption'
+        }
+      }
+    },
+    AnswerOption: {
+      type: object,
+      properties: {
+        id: {
+          type: number
+        },
+        description: {
+          type: string
+        }
+      }
+    },
+    ErrorDescription: {
+      type: object,
+      properties: {
+        title: {
+          type: string
+        },
+        description: {
+          type: string
+        }
+      }
+    }
+  }
+}

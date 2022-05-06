@@ -33,6 +33,12 @@
       		<artifactId>springdoc-openapi-ui</artifactId>
       		<version>${spring.doc.version}</version>
    		</dependency>
+   		
+   		<dependency>
+    		<groupId>org.openapitools</groupId>
+    		<artifactId>jackson-databind-nullable</artifactId>
+    		<version>0.2.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -41,6 +47,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.boot.version}</version>
+			</plugin>
+			<plugin>
+			    <groupId>org.openapitools</groupId>
+			    <artifactId>openapi-generator-maven-plugin</artifactId>
+			    <!-- RELEASE_VERSION -->
+			    <version>5.4.0</version>
+			    <!-- /RELEASE_VERSION -->
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <configuration>
+			            	<generatorName>spring</generatorName>
+			                <library>spring-boot</library>
+			                <inputSpec>src/main/resources/api.yaml</inputSpec>
+			                <configOptions>
+			                	<packageName>ch.artquizrunner</packageName>
+			                	<modelPackage>ch.artquizrunner.model</modelPackage>
+                    			<apiPackage>ch.artquizrunner.api</apiPackage>
+                    			<interfaceOnly>true</interfaceOnly>
+                    			<useTags>true</useTags>
+			                </configOptions>
+			            </configuration>
+			        </execution>
+			    </executions>
 			</plugin>
 		</plugins>
 	</build>
