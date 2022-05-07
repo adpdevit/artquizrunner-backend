@@ -6,6 +6,30 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 paths:
+  /api/admin/question:
+    post:
+      tags:
+        - Admin
+      operationId: addQuestion
+      description: Send a new question available in game
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+      responses:
+        '201':
+          description: Created - Cookie / Header contains game state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+        '400':
+          description: wrong schem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
   /api/player/quiz/state:
     get:
       tags:
