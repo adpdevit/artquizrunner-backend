@@ -1,4 +1,4 @@
-package ch.artquizrunner.springboot;
+package ch.artquizrunner;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
