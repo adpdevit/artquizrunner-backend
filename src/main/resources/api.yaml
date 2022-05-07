@@ -6,23 +6,23 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 paths:
-  /api/player/quiz/gamestate:
+  /api/player/quiz/state:
     get:
       tags:
-        - quiz
-      operationId: getInitialGameState
-      description: Get initial game state
+        - Quiz
+      operationId: getInitialQuizState
+      description: Get initial quiz state
       responses:
         '200':
-          description: OK - Cookie / Header contains game state
+          description: OK - Cookie / Header contains quiz state
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GameState'
+                $ref: '#/components/schemas/QuizState'
   /api/player/quiz/answer:
     post:
       tags:
-        - quiz
+        - Quiz
       operationId: handlePlayerChoice
       description: Send the curent player choice
       requestBody:
@@ -36,7 +36,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GameState'
+                $ref: '#/components/schemas/QuizState'
         '400':
           description: Missing JWT state or wrong schem
           content:
@@ -45,17 +45,35 @@ paths:
                 $ref: '#/components/schemas/ErrorDescription'
 components: {
   schemas: {
-    GameState: {
+    QuizState: {
       type: object,
       properties: {
         nextQuestion: {
           $ref: '#/components/schemas/Question'
         },
+        gameState: {
+          $ref: '#/components/schemas/GameState'
+        }
+      }
+    },
+    GameState: {
+      type: object,
+      properties: {
         currentPoints: {
-          type: number
+          type: integer,
+          format: int64
         },
         endState: {
-          type: number
+          type: integer,
+          format: int64
+        },
+        goodInARow: {
+          type: integer,
+          format: int64
+        },
+        badInARow: {
+          type: integer,
+          format: int64
         }
       }
     },
@@ -63,7 +81,8 @@ components: {
       type: object,
       properties: {
         id: {
-          type: number
+          type: integer,
+          format: int64
         },
         description: {
           type: string
@@ -88,7 +107,8 @@ components: {
       type: object,
       properties: {
         id: {
-          type: number
+          type: integer,
+          format: int64
         },
         description: {
           type: string
