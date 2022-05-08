@@ -39,7 +39,7 @@ public class QuizEngineService {
         QuestionEntity answeredQuestion = questionRepository
                 .getQuestionById(currentGameState.getNextQuestion().getId());
         Optional<AnswerEntity> emptyIfBadAnswer = answeredQuestion.getOptions().stream()
-                .filter(AnswerEntity::getIsCorrect)
+                .filter(answer -> Boolean.TRUE.equals(answer.getIsCorrect()))
                 .filter(answer -> answer.getId().equals(playerAnswer.getChosenOption().getId())).findAny();
 
         GameState newGameState = null;

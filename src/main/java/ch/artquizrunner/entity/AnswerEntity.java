@@ -31,11 +31,11 @@ public class AnswerEntity {
         this.description = description;
     }
 
-    public boolean getIsCorrect() {
+    public Boolean getIsCorrect() {
         return isCorrect;
     }
 
-    public void setIsCorrect(boolean isCorrect) {
+    public void setIsCorrect(Boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
 
