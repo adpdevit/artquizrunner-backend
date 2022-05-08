@@ -14,6 +14,8 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
+		<auth0.jwt>3.19.2</auth0.jwt>
+		<openapi.jackson.nullable>0.2.2</openapi.jackson.nullable>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,16 +43,10 @@
       		<version>${spring.doc.version}</version>
    		</dependency>
    		
-   		<!--<dependency>
-    		<groupId>de.flapdoodle.embed</groupId>
-    		<artifactId>de.flapdoodle.embed.mongo</artifactId>
-    		<version>3.4.5</version>
-		</dependency>-->
-   		
    		<dependency>
     		<groupId>org.openapitools</groupId>
     		<artifactId>jackson-databind-nullable</artifactId>
-    		<version>0.2.2</version>
+    		<version>${openapi.jackson.nullable}</version>
 		</dependency>
     	
     	<dependency>
@@ -63,6 +59,12 @@
 		    <artifactId>mapstruct-processor</artifactId>
 		    <version>${org.mapstruct.version}</version>
 		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.auth0</groupId>
+		    <artifactId>java-jwt</artifactId>
+		    <version>${auth0.jwt}</version>
 		</dependency>
 
 	</dependencies>

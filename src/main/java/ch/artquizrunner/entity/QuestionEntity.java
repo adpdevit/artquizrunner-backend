@@ -7,8 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import ch.artquizrunner.model.AnswerOption;
-
 @Document(collection = "question")
 public class QuestionEntity {
     @Id
@@ -17,7 +15,7 @@ public class QuestionEntity {
     private String description;
 
     @DBRef
-    private Set<AnswerOption> options = null;
+    private Set<AnswerEntity> options = null;
 
     public Long getId() {
         return id;
@@ -35,11 +33,11 @@ public class QuestionEntity {
         this.description = description;
     }
 
-    public Set<AnswerOption> getOptions() {
+    public Set<AnswerEntity> getOptions() {
         return options;
     }
 
-    public void setOptions(Set<AnswerOption> options) {
+    public void setOptions(Set<AnswerEntity> options) {
         this.options = options;
     }
 

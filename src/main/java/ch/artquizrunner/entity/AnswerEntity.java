@@ -13,7 +13,7 @@ public class AnswerEntity {
 
     private String description;
 
-    private boolean isCorrect;
+    private Boolean isCorrect;
 
     public Long getId() {
         return id;
@@ -31,11 +31,11 @@ public class AnswerEntity {
         this.description = description;
     }
 
-    public boolean isCorrect() {
+    public boolean getIsCorrect() {
         return isCorrect;
     }
 
-    public void setCorrect(boolean isCorrect) {
+    public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
 
