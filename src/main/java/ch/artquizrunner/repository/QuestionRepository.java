@@ -31,12 +31,12 @@ public class QuestionRepository {
     @Autowired
     private AnswerRepository answerRepository;
 
-    public Optional<QuestionEntity> getRandomQuestionEntity() {
-        SampleOperation matchStage = Aggregation.sample(1);
+    public Optional<QuestionEntity> getRandomQuestionEntity(Long previousId) {
+        SampleOperation matchStage = Aggregation.sample(2);
         Aggregation aggregation = Aggregation.newAggregation(matchStage);
         AggregationResults<QuestionEntity> output = mongoTemplate.aggregate(aggregation, "question",
                 QuestionEntity.class);
-        return output.getMappedResults().stream().findAny();
+        return output.getMappedResults().stream().filter(q -> !q.getId().equals(previousId)).findAny();
     }
 
     public QuestionEntity addQuestion(QuestionEntity question) {

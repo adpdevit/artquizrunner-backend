@@ -25,12 +25,15 @@ public class QuizCookieGenerator {
     public String getQuizCookieContent(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         String jwt = null;
-        for (int i = 0; i < cookies.length; i++) {
-            if (QUIZ_COOKIE_NAME.equals(cookies[i].getName())) {
-                jwt = cookies[i].getValue();
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (QUIZ_COOKIE_NAME.equals(cookies[i].getName())) {
+                    jwt = cookies[i].getValue();
+                }
             }
+            return jwt;
         }
-        return jwt;
+        return null;
     }
 
 }

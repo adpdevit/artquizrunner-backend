@@ -27,7 +27,7 @@ public class QuizEngineService {
 
         // TODO: Set first question of the quiz
         quizState.setNextQuestion(
-                QuizMapper.INSTANCE.questionEntityToDTO(questionRepository.getRandomQuestionEntity().get()));
+                QuizMapper.INSTANCE.questionEntityToDTO(questionRepository.getRandomQuestionEntity(null).get()));
         quizState.setGameState(gameEngine.getInitialGameState());
 
         return quizState;
@@ -50,8 +50,8 @@ public class QuizEngineService {
         }
 
         newQuizState.setGameState(newGameState);
-        newQuizState.setNextQuestion(
-                QuizMapper.INSTANCE.questionEntityToDTO(questionRepository.getRandomQuestionEntity().get()));
+        newQuizState.setNextQuestion(QuizMapper.INSTANCE
+                .questionEntityToDTO(questionRepository.getRandomQuestionEntity(answeredQuestion.getId()).get()));
 
         return newQuizState;
     }
