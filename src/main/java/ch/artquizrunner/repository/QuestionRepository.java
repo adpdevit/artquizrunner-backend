@@ -1,5 +1,6 @@
 package ch.artquizrunner.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,6 +55,20 @@ public class QuestionRepository {
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, QuestionEntity.class);
+    }
+
+    public QuestionEntity deleteQuestionById(Long id) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("id").is(id));
+        QuestionEntity toDelete = mongoTemplate.findOne(query, QuestionEntity.class);
+        if (toDelete == null)
+            return null;
+        mongoTemplate.remove(toDelete);
+        return toDelete;
+    }
+
+    public List<QuestionEntity> getQuestionList() {
+        return mongoTemplate.findAll(QuestionEntity.class);
     }
 
 }

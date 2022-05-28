@@ -30,6 +30,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
+    get:
+      tags:
+        - Admin
+      operationId: getAllQuestions
+      description: Get all questions available in game
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuestionFull'
+        '400':
+          description: wrong schem
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDescription'
+  /api/admin/question/{id}:
+    delete:
+      tags:
+        - Admin
+      operationId: deleteQuestionById
+      description: Delete question identified by given ID
+      parameters:
+        - name: id
+          in: path
+          description: 'The comment that needs to be fetched.'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionFull'
   /api/player/quiz/state:
     get:
       tags:
