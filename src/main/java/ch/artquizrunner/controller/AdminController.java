@@ -48,13 +48,19 @@ public class AdminController implements AdminApi {
     @Override
     public ResponseEntity<QuestionFull> deleteQuestionById(
             @Parameter(name = "id", description = "The comment that needs to be fetched.", required = true, schema = @Schema(description = "")) @PathVariable("id") Long id) {
-        return ResponseEntity
-                .ok(QuizMapper.INSTANCE.questionEntityToFullDTO(questionRepository.deleteQuestionById(id)));
+        if (secret.equals(request.getHeader("Authorization"))) {
+            return ResponseEntity
+                    .ok(QuizMapper.INSTANCE.questionEntityToFullDTO(questionRepository.deleteQuestionById(id)));
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
     @Override
     public ResponseEntity<List<QuestionFull>> getAllQuestions() {
-        return ResponseEntity.ok(questionRepository.getQuestionList().stream()
-                .map(QuizMapper.INSTANCE::questionEntityToFullDTO).collect(Collectors.toList()));
+        if (secret.equals(request.getHeader("Authorization"))) {
+            return ResponseEntity.ok(questionRepository.getQuestionList().stream()
+                    .map(QuizMapper.INSTANCE::questionEntityToFullDTO).collect(Collectors.toList()));
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }

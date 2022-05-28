@@ -77,6 +77,12 @@ paths:
         - Quiz
       operationId: getInitialQuizState
       description: Get initial quiz state
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          description: the username of the player
       responses:
         '200':
           description: OK - Cookie / Header contains quiz state
@@ -108,11 +114,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorDescription'
+  /api/score/best:
+    get:
+      tags:
+        - Score
+      operationId: getBestScores
+      description: get last X best player scores
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            format: int32
+          description: the number of scores to get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Score'
 components: {
   schemas: {
     QuizState: {
       type: object,
       properties: {
+        username: {
+          type: string
+        },
         nextQuestion: {
           $ref: '#/components/schemas/Question'
         },
@@ -221,6 +252,22 @@ components: {
         },
         description: {
           type: string
+        }
+      }
+    },
+    Score: {
+      type: object,
+      properties: {
+        id: {
+          type: integer,
+          format: int64
+        },
+        username: {
+          type: string
+        },
+        score: {
+          type: integer,
+          format: int64
         }
       }
     }
