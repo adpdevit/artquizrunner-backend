@@ -136,6 +136,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Score'
+  /api/health:
+    get:
+      tags:
+        - Configuration
+      operationId: health
+      description: is server alive ?
+      responses:
+        '200':
+          description: OK - server alive
 components: {
   schemas: {
     QuizState: {
