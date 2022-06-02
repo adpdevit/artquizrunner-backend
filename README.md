@@ -9,6 +9,8 @@ Please refer to https://github.com/Valefrg/art-quiz-runner to know more on the c
 
 Build the project with maven and run the output jar or execute the latest jar build (/exec folder)
 
+password for admin operations : dummypass
+
 ## Short
 
 This project has been developed by @adpdevit for a little game project led by @valefrg. The main purpose was to provide a server that maintains a quizz game state in a
